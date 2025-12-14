@@ -28,5 +28,23 @@ int main() {
     }
     std::cout << std::endl;
 
+    Soviet::FlexibleArray arr;
+    arr.Add(2);
+    arr.Add(10);
+    arr.Add(9);
+    arr.Add(5);
+    arr.Add(1);
+    arr.Add(4);
+    arr.Add(6);
+    arr.Add(3);
+    arr.Add(8);
+    arr.Add(7);
+    
+    std::cout << arr.ToString() << std::endl;
+
+    arr = Soviet::StalinMergeSort(arr);
+    
+    std::cout << arr.ToString() << std::endl;
+
     return 0;
 }

@@ -62,7 +62,7 @@ namespace Soviet {
             UpdateCapacity();
         }
         
-        int Count() {
+        int Count() const {
             return count;
         }
 
@@ -74,6 +74,14 @@ namespace Soviet {
         }
 
         int& operator[](int index) {
+            if (index < 0 || index >= count) {
+                throw "Index out of range.";
+            }
+
+            return arr[index];
+        }
+
+        int operator[](int index) const {
             if (index < 0 || index >= count) {
                 throw "Index out of range.";
             }
@@ -161,6 +169,30 @@ namespace Soviet {
         }
     };
 
+    FlexibleArray StalinMergeSort(const FlexibleArray& old_citizens) {
+        if (old_citizens.Count() <= 1) {
+            return old_citizens;
+        }
+
+        FlexibleArray new_citizens;
+        new_citizens.Add(old_citizens[0]);
+        FlexibleArray prisoners;
+        for (int i = 1; i < old_citizens.Count(); i++) {
+            if (new_citizens[new_citizens.Count() - 1] > old_citizens[i]) {
+                prisoners.Add(old_citizens[i]);
+            }
+            else {
+                new_citizens.Add(old_citizens[i]);
+            }
+        }
+
+        FlexibleArray reformed_citizens = StalinMergeSort(prisoners);
+        
+        new_citizens.Merge(reformed_citizens);
+
+        return new_citizens;
+    }
+
     class Gulag {
     private:
         FlexibleArray prisoners;
@@ -183,33 +215,13 @@ namespace Soviet {
         }
 
         void LaborReform() {
-            if (prisoners.Count() == 0) {
-                return;
-            }
-
-            unsigned int new_prisoner_population = 0;
-            FlexibleArray reformed_person;
-            reformed_person.Add(prisoners[0]);
-            for (int i = 1; i < prisoners.Count(); i++) {
-                if (reformed_person[reformed_person.Count() - 1] < prisoners[i]) {
-                    reformed_person.Add(prisoners[i]);
-                }
-                else {
-                    prisoners[new_prisoner_population] = prisoners[i];
-                    new_prisoner_population++;
-                }
-            }
-            prisoners.RemoveFromBack(prisoners.Count() - new_prisoner_population);
-
-            new_citizens.Merge(reformed_person);
+            prisoners = StalinMergeSort(prisoners);
         }
         
-        FlexibleArray NewCitizens() {
-            return new_citizens;
-        }
-        
-        void ReleaseNewCitizens() {
-            new_citizens.Clean();
+        FlexibleArray ReleaseReformedCitizens() {
+            FlexibleArray tmp = prisoners;
+            prisoners.Clean();
+            return tmp;
         }
     };
     
@@ -245,10 +257,8 @@ namespace Soviet {
 
         void StalinMergeSort() {
             Purge();
-            while (gulag.Population() > 0) {
-                gulag.LaborReform();
-                AcceptNewCitizens();
-            }
+            gulag.LaborReform();
+            AcceptNewCitizens();
         }
         
         void Purge() {
@@ -270,8 +280,7 @@ namespace Soviet {
         }
         
         void AcceptNewCitizens() {
-            FlexibleArray new_citizens = gulag.NewCitizens();
-            gulag.ReleaseNewCitizens();
+            FlexibleArray new_citizens = gulag.ReleaseReformedCitizens();
             citizens.Merge(new_citizens);
         }
     };
