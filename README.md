@@ -64,4 +64,4 @@ void StalinMergeSort() {
 AMAZING, you have a sorted array now.
 
 # References and Acknowledgements
-This project references the [Stalin Sort repo](https://github.com/gustavo-depaula/stalin-sort).
+This project references the [Stalin Sort repo](https://github.com/gustavo-depaula/stalin-sort) in the algorithm.
