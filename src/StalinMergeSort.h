@@ -196,7 +196,6 @@ namespace Soviet {
     class Gulag {
     private:
         FlexibleArray prisoners;
-        FlexibleArray new_citizens;
     public:
         Gulag() {
             
@@ -207,7 +206,7 @@ namespace Soviet {
         }
 
         int Population() {
-            return prisoners.Count() + new_citizens.Count();
+            return prisoners.Count();
         }
         
         void AddPrisoner(int prisoner_name) {
