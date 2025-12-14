@@ -17,7 +17,7 @@ Just
 -> send to the Gulag  
 -> LaborReform them  
 -> merge those who are reformed back to the origin citizens  
--> keep 2, 3 step util there are no more prisoners in Gulag  
+-> keep 2, 3 step until there are no more prisoners in Gulag  
 -> now you have a sorted array  
 -> AMAZING!!!
 ![](example.png)
