@@ -91,6 +91,9 @@ void Soviet::FlexibleArray::operator=(const FlexibleArray& new_arr) {
 }
 
 int Soviet::FlexibleArray::Back() const {
+    if (count <= 0) {
+        throw "Can not get back of a array that have nothing";
+    }
     return arr[count - 1];
 }
 
@@ -111,7 +114,7 @@ void Soviet::FlexibleArray::UpdateCapacity() {
     }
 }
         
-void Soviet::FlexibleArray::Merge(const FlexibleArray& new_arr) {
+void Soviet::FlexibleArray::MergeByOrder(const FlexibleArray& new_arr) {
     if (new_arr.count == 0) {
         return;
     }

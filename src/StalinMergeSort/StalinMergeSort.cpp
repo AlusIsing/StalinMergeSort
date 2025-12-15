@@ -1,7 +1,5 @@
 #include "./StalinMergeSort.h"
 
-#include <iostream>
-
 Soviet::FlexibleArray Soviet::StalinMergeSort(const FlexibleArray& old_citizens) {
     if (old_citizens.Count() <= 1) {
         return old_citizens;
@@ -21,7 +19,7 @@ Soviet::FlexibleArray Soviet::StalinMergeSort(const FlexibleArray& old_citizens)
 
     FlexibleArray reformed_citizens = StalinMergeSort(prisoners);
     
-    new_citizens.Merge(reformed_citizens);
+    new_citizens.MergeByOrder(reformed_citizens);
 
     return new_citizens;
 }
@@ -33,8 +31,6 @@ Soviet::FlexibleArray Soviet::BidirectionalStalinMergeSort(const FlexibleArray& 
 
     FlexibleArray new_citizens1(old_citizens.ToPointer(), 1);
     
-    std::cout << new_citizens1.ToString() << std::endl;
-
     FlexibleArray prisoners1;
     for (int i = 1; i < old_citizens.Count(); i++) {
         if (new_citizens1.Back() > old_citizens[i]) {
@@ -43,6 +39,15 @@ Soviet::FlexibleArray Soviet::BidirectionalStalinMergeSort(const FlexibleArray& 
         else {
             new_citizens1.Add(old_citizens[i]);
         }
+    }
+    
+    if (prisoners1.Count() < 1) {
+        return new_citizens1;
+    }
+
+    if (prisoners1.Count() == 1) {
+        new_citizens1.MergeByOrder(prisoners1);
+        return new_citizens1;
     }
 
     FlexibleArray new_citizens2;
@@ -58,9 +63,9 @@ Soviet::FlexibleArray Soviet::BidirectionalStalinMergeSort(const FlexibleArray& 
         }
     }
 
-    new_citizens1.Merge(new_citizens2);
+    new_citizens1.MergeByOrder(new_citizens2);
 
-    new_citizens1.Merge(BidirectionalStalinMergeSort(prisoners2));
+    new_citizens1.MergeByOrder(BidirectionalStalinMergeSort(prisoners2));
 
     return new_citizens1;
 }

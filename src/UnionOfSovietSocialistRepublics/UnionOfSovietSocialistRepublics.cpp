@@ -80,5 +80,5 @@ void Soviet::UnionOfSovietSocialistRepublics::Purge() {
         
 void Soviet::UnionOfSovietSocialistRepublics::AcceptNewCitizens() {
     FlexibleArray new_citizens = gulag.ReleaseReformedCitizens();
-    citizens.Merge(new_citizens);
+    citizens.MergeByOrder(new_citizens);
 }

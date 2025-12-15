@@ -42,7 +42,7 @@ namespace Soviet {
         
         void UpdateCapacity();
         
-        void Merge(const FlexibleArray& new_arr);
+        void MergeByOrder(const FlexibleArray& new_arr);
 
         int* ToPointer() const;
 

@@ -75,7 +75,7 @@ FlexibleArray StalinMergeSort(const FlexibleArray& old_citizens) {
     }
     FlexibleArray reformed_citizens = StalinMergeSort(prisoners);
     
-    new_citizens.Merge(reformed_citizens);
+    new_citizens.MergeByOrder(reformed_citizens);
     return new_citizens;
 }
 ```
