@@ -5,6 +5,8 @@
 
 namespace Soviet {
     FlexibleArray StalinMergeSort(const FlexibleArray& old_citizens);
+
+    FlexibleArray BidirectionalStalinMergeSort(const FlexibleArray& old_citizens);
 }
 
 #endif // STALINMERGESORT_H
