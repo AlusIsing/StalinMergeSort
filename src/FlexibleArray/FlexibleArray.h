@@ -16,7 +16,7 @@ namespace Soviet {
 
         FlexibleArray(const FlexibleArray& new_arr);
 
-        FlexibleArray(const int* pointer, int count);
+        FlexibleArray(const int array[], int count);
 
         ~FlexibleArray();
 
@@ -37,14 +37,16 @@ namespace Soviet {
         int operator[](int index) const;
 
         void operator=(const FlexibleArray& new_arr);
+
+        int Back() const;
         
         void UpdateCapacity();
         
         void Merge(const FlexibleArray& new_arr);
 
-        int* ToPointer();
+        int* ToPointer() const;
 
-        std::string ToString();
+        std::string ToString() const;
     };
 }
 

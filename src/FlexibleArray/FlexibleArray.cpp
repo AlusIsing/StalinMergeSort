@@ -14,11 +14,11 @@ Soviet::FlexibleArray::FlexibleArray(const FlexibleArray& new_arr) {
     std::copy(new_arr.arr, new_arr.arr + new_arr.count, arr);
 }
 
-Soviet::FlexibleArray::FlexibleArray(const int* pointer, int count) {
+Soviet::FlexibleArray::FlexibleArray(const int array[], int count) {
     capacity = count + reserved_capacity;
     this->count = count;
     arr = new int[capacity];
-    std::copy(pointer, pointer + count, arr);
+    std::copy(array, array + count, arr);
 }
 
 Soviet::FlexibleArray::~FlexibleArray() {
@@ -90,6 +90,10 @@ void Soviet::FlexibleArray::operator=(const FlexibleArray& new_arr) {
     std::copy(new_arr.arr, new_arr.arr + new_arr.count, arr);
 }
 
+int Soviet::FlexibleArray::Back() const {
+    return arr[count - 1];
+}
+
 void Soviet::FlexibleArray::UpdateCapacity() {
     if (count == capacity) {
         capacity += reserved_capacity;
@@ -146,12 +150,12 @@ void Soviet::FlexibleArray::Merge(const FlexibleArray& new_arr) {
     count = count + new_arr.count;
     arr = final_arr;
 }
-int* Soviet::FlexibleArray::ToPointer() {
+int* Soviet::FlexibleArray::ToPointer() const {
     int* result = new int[count];
     std::copy(arr, arr + count, result);
     return result;
 }
-std::string Soviet::FlexibleArray::ToString() {
+std::string Soviet::FlexibleArray::ToString() const {
     std::string result = "";
     for (int i = 0; i < count; i++) {
         std::string num_str = std::to_string(arr[i]);
