@@ -7,11 +7,26 @@ Soviet::FlexibleArray::FlexibleArray() {
     arr = new int[capacity];
 }
 
-Soviet::FlexibleArray::FlexibleArray(const FlexibleArray& new_arr) {
-    capacity = new_arr.capacity;
-    count = new_arr.count;
+Soviet::FlexibleArray::FlexibleArray(const FlexibleArray& new_arr, int start, int count) {
+    reserved_capacity = new_arr.reserved_capacity;
+    int end = -1;
+    if (count <= -1) {
+        end = new_arr.count + start;
+    }
+    else {
+        end = count + start;
+    }
+
+    if (end > new_arr.count) {
+        throw "Count out of range";
+    }
+    
+    this->count = end - start;
+
+    capacity = this->count + reserved_capacity;
+    
     arr = new int[capacity];
-    std::copy(new_arr.arr, new_arr.arr + new_arr.count, arr);
+    std::copy(new_arr.arr + start, new_arr.arr + end, arr);
 }
 
 Soviet::FlexibleArray::FlexibleArray(const int array[], int count) {
@@ -27,6 +42,10 @@ Soviet::FlexibleArray::~FlexibleArray() {
 
 void Soviet::FlexibleArray::Add(int item) {
     UpdateCapacity();
+    if (count >= capacity) {
+        throw "Have no enough capacity for a FlexibleArray to add item.";
+    }
+    
     arr[count] = item;
     count++;
 }
@@ -115,14 +134,15 @@ void Soviet::FlexibleArray::UpdateCapacity() {
 }
         
 void Soviet::FlexibleArray::MergeByOrder(const FlexibleArray& new_arr) {
-    if (new_arr.count == 0) {
+    if (new_arr.count <= 0) {
         return;
     }
     
-    if (count == 0) {
+    if (count <= 0) {
         *this = new_arr;
         return;
     }
+
     int* final_arr = new int[count + new_arr.count + reserved_capacity];
     unsigned int arr_counter = 0;
     unsigned int new_arr_counter = 0;
@@ -153,11 +173,13 @@ void Soviet::FlexibleArray::MergeByOrder(const FlexibleArray& new_arr) {
     count = count + new_arr.count;
     arr = final_arr;
 }
+
 int* Soviet::FlexibleArray::ToPointer() const {
     int* result = new int[count];
     std::copy(arr, arr + count, result);
     return result;
 }
+
 std::string Soviet::FlexibleArray::ToString() const {
     std::string result = "";
     for (int i = 0; i < count; i++) {

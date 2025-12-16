@@ -4,21 +4,34 @@
 
 int main() {
     Soviet::UnionOfSovietSocialistRepublics union_of_soviet_socialist_republics;
-
-    union_of_soviet_socialist_republics.AddCitizen(2);
-    union_of_soviet_socialist_republics.AddCitizen(10);
-    union_of_soviet_socialist_republics.AddCitizen(9);
-    union_of_soviet_socialist_republics.AddCitizen(5);
-    union_of_soviet_socialist_republics.AddCitizen(1);
-    union_of_soviet_socialist_republics.AddCitizen(4);
-    union_of_soviet_socialist_republics.AddCitizen(6);
-    union_of_soviet_socialist_republics.AddCitizen(3);
-    union_of_soviet_socialist_republics.AddCitizen(8);
-    union_of_soviet_socialist_republics.AddCitizen(7);
     
-    std::cout << union_of_soviet_socialist_republics.Citizens().ToString() << std::endl;
+    std::cout << "create" << std::endl;
+    
+    try {
 
-    union_of_soviet_socialist_republics.StalinMergeSort();
+        union_of_soviet_socialist_republics.AddCitizen(2);
+        union_of_soviet_socialist_republics.AddCitizen(10);
+        union_of_soviet_socialist_republics.AddCitizen(9);
+        union_of_soviet_socialist_republics.AddCitizen(5);
+        union_of_soviet_socialist_republics.AddCitizen(1);
+        union_of_soviet_socialist_republics.AddCitizen(4);
+        union_of_soviet_socialist_republics.AddCitizen(6);
+        union_of_soviet_socialist_republics.AddCitizen(3);
+        union_of_soviet_socialist_republics.AddCitizen(8);
+        union_of_soviet_socialist_republics.AddCitizen(7);
+    
+        std::cout << union_of_soviet_socialist_republics.Citizens().ToString() << std::endl;
+    }
+    catch (const char* e) {
+        std::cout << e << std::endl;
+    }
+
+    try {
+        union_of_soviet_socialist_republics.StalinMergeSort();
+    }
+    catch (const char* e) {
+        std::cout << e << std::endl;
+    }
 
     std::cout << union_of_soviet_socialist_republics.Citizens().ToString() << std::endl;
 

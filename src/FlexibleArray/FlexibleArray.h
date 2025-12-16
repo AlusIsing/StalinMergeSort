@@ -14,7 +14,7 @@ namespace Soviet {
     public:
         FlexibleArray();
 
-        FlexibleArray(const FlexibleArray& new_arr);
+        FlexibleArray(const FlexibleArray& new_arr, int start = 0, int count = -1);
 
         FlexibleArray(const int array[], int count);
 

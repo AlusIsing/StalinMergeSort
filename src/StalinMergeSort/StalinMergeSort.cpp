@@ -5,7 +5,7 @@ Soviet::FlexibleArray Soviet::StalinMergeSort(const FlexibleArray& old_citizens)
         return old_citizens;
     }
 
-    FlexibleArray new_citizens(old_citizens.ToPointer(), 1);
+    FlexibleArray new_citizens(old_citizens, 0, 1);
     
     FlexibleArray prisoners;
     for (int i = 1; i < old_citizens.Count(); i++) {
@@ -29,7 +29,7 @@ Soviet::FlexibleArray Soviet::BidirectionalStalinMergeSort(const FlexibleArray& 
         return old_citizens;
     }
 
-    FlexibleArray new_citizens1(old_citizens.ToPointer(), 1);
+    FlexibleArray new_citizens1(old_citizens, 0, 1);
     
     FlexibleArray prisoners1;
     for (int i = 1; i < old_citizens.Count(); i++) {
