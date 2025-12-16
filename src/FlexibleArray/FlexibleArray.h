@@ -31,6 +31,8 @@ namespace Soviet {
         
         int Count() const;
 
+        void ReallocCapacity(unsigned int new_capacity);
+
         void SetAutoRealloc(bool auto_realloc);
 
         void SetReservedCapacity(unsigned int reserved_capacity);

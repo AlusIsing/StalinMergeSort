@@ -97,6 +97,17 @@ int Soviet::FlexibleArray::Count() const {
     return count;
 }
 
+void Soviet::FlexibleArray::ReallocCapacity(unsigned int new_capacity) {
+    if (new_capacity < count) {
+        throw "The new capacity is too small";
+    }
+
+    int* tmp = new int[new_capacity];
+    std::copy(arr, arr + count, tmp);
+    delete[] arr;
+    arr = tmp;
+}
+
 void Soviet::FlexibleArray::SetAutoRealloc(bool auto_realloc) {
     this->auto_realloc = auto_realloc;
 }
