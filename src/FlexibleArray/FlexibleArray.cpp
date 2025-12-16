@@ -26,14 +26,22 @@ Soviet::FlexibleArray::FlexibleArray(const FlexibleArray& new_arr, int start, in
     capacity = this->count + reserved_capacity;
     
     arr = new int[capacity];
+    
     std::copy(new_arr.arr + start, new_arr.arr + end, arr);
 }
 
-Soviet::FlexibleArray::FlexibleArray(const int array[], int count) {
-    capacity = count + reserved_capacity;
+Soviet::FlexibleArray::FlexibleArray(const int array[], int start, int count) {
+    reserved_capacity = 10;
+    
+    int end = count + start;
+
     this->count = count;
+
+    capacity = this->count + reserved_capacity;
+
     arr = new int[capacity];
-    std::copy(array, array + count, arr);
+    
+    std::copy(array + start, array + end, arr);
 }
 
 Soviet::FlexibleArray::~FlexibleArray() {
@@ -174,10 +182,10 @@ void Soviet::FlexibleArray::MergeByOrder(const FlexibleArray& new_arr) {
     arr = final_arr;
 }
 
-int* Soviet::FlexibleArray::ToPointer() const {
+void Soviet::FlexibleArray::ToPointer(int*& ptr) const {
     int* result = new int[count];
     std::copy(arr, arr + count, result);
-    return result;
+    ptr = result;
 }
 
 std::string Soviet::FlexibleArray::ToString() const {

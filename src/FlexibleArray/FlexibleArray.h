@@ -16,7 +16,7 @@ namespace Soviet {
 
         FlexibleArray(const FlexibleArray& new_arr, int start = 0, int count = -1);
 
-        FlexibleArray(const int array[], int count);
+        FlexibleArray(const int array[], int start, int count);
 
         ~FlexibleArray();
 
@@ -44,7 +44,7 @@ namespace Soviet {
         
         void MergeByOrder(const FlexibleArray& new_arr);
 
-        int* ToPointer() const;
+        void ToPointer(int*& ptr) const;
 
         std::string ToString() const;
     };

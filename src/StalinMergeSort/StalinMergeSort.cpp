@@ -41,11 +41,7 @@ Soviet::FlexibleArray Soviet::BidirectionalStalinMergeSort(const FlexibleArray& 
         }
     }
     
-    if (prisoners1.Count() < 1) {
-        return new_citizens1;
-    }
-
-    if (prisoners1.Count() == 1) {
+    if (prisoners1.Count() <= 1) {
         new_citizens1.MergeByOrder(prisoners1);
         return new_citizens1;
     }

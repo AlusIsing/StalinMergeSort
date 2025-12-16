@@ -50,7 +50,7 @@ int main() {
     
     std::cout << arr.ToString() << std::endl;
 
-    arr = Soviet::StalinMergeSort(arr);
+    arr = Soviet::BidirectionalStalinMergeSort(arr);
     
     std::cout << arr.ToString() << std::endl;
 
