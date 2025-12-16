@@ -1,14 +1,23 @@
 #include "./FlexibleArray.h"
 
-Soviet::FlexibleArray::FlexibleArray() {
-    reserved_capacity = 10;
+Soviet::FlexibleArray::FlexibleArray(bool auto_realloc, int reserved_capacity) {
+    this->auto_realloc = auto_realloc;
+    reserved_capacity = reserved_capacity;
     capacity = reserved_capacity;
     count = 0;
     arr = new int[capacity];
 }
 
-Soviet::FlexibleArray::FlexibleArray(const FlexibleArray& new_arr, int start, int count) {
-    reserved_capacity = new_arr.reserved_capacity;
+Soviet::FlexibleArray::FlexibleArray(const FlexibleArray& new_arr, int start, int count, bool auto_realloc, int reserved_capacity) {
+    this->auto_realloc = auto_realloc;
+
+    if (reserved_capacity <= -1) {
+        this->reserved_capacity = new_arr.reserved_capacity;
+    }
+    else {
+        this->reserved_capacity = reserved_capacity;
+    }
+
     int end = -1;
     if (count <= -1) {
         end = new_arr.count + start;
@@ -88,6 +97,14 @@ int Soviet::FlexibleArray::Count() const {
     return count;
 }
 
+void Soviet::FlexibleArray::SetAutoRealloc(bool auto_realloc) {
+    this->auto_realloc = auto_realloc;
+}
+
+void Soviet::FlexibleArray::SetReservedCapacity(unsigned int reserved_capacity) {
+    this->reserved_capacity = reserved_capacity;
+}
+
 void Soviet::FlexibleArray::Clean() {
     delete[] arr;
     capacity = reserved_capacity;
@@ -132,7 +149,7 @@ void Soviet::FlexibleArray::UpdateCapacity() {
         delete[] arr;
         arr = tmp;
     }
-    else if (capacity >= 20 && count <= capacity - 20) {
+    else if (auto_realloc && capacity >= 20 && count <= capacity - 20) {
         capacity -= reserved_capacity;
         int* tmp = new int[capacity];
         std::copy(arr, arr + count, tmp);

@@ -7,14 +7,15 @@
 namespace Soviet {
     class FlexibleArray {
     private:
+        bool auto_realloc;
         unsigned int capacity;
         unsigned int count;
         unsigned int reserved_capacity;
         int* arr;
     public:
-        FlexibleArray();
+        FlexibleArray(bool auto_realloc = true, int reserved_capacity = 10);
 
-        FlexibleArray(const FlexibleArray& new_arr, int start = 0, int count = -1);
+        FlexibleArray(const FlexibleArray& new_arr, int start = 0, int count = -1, bool auto_realloc = true, int reserved_capacity = -1);
 
         FlexibleArray(const int array[], int start, int count);
 
@@ -29,6 +30,10 @@ namespace Soviet {
         void RemoveFromBack(int size = 1);
         
         int Count() const;
+
+        void SetAutoRealloc(bool auto_realloc);
+
+        void SetReservedCapacity(unsigned int reserved_capacity);
 
         void Clean();
 
